@@ -122,6 +122,12 @@
       "namedRegex": "^/admin/settings(?:/)?$"
     },
     {
+      "page": "/admin/settings/diagnostics",
+      "regex": "^/admin/settings/diagnostics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/settings/diagnostics(?:/)?$"
+    },
+    {
       "page": "/contact",
       "regex": "^/contact(?:/)?$",
       "routeKeys": {},

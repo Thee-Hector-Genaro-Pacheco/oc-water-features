@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/layout/SectionHeading";
 import { ContactCTA } from "@/components/home/ContactCTA";
 
 export const metadata: Metadata = constructMetadata({
-  title: "About Us | Southern California Water Feature Specialists Since 1992",
+  title: "About Us | Southern California Water Feature Specialists | Industry Experience Since 1992",
   description:
     "Learn about OC Water Features, a family-operated company with over 30 years of hands-on experience maintaining and repairing fountains, ponds, and waterfalls in Orange County.",
   canonical: "/about"

@@ -26,7 +26,7 @@ export const AboutPreview: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-aqua-400 uppercase tracking-widest block">
-                    Established 1992
+                    Experience Since 1992
                   </span>
                   <h3 className="text-xl font-bold text-white">Family-Operated</h3>
                 </div>

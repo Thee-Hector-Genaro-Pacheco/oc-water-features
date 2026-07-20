@@ -3,7 +3,7 @@ import { Metadata } from "next";
 const siteUrl = "https://ocwaterfeatures.com";
 const defaultTitle = "OC Water Features | Professional Water Feature Maintenance & Repair";
 const defaultDescription =
-  "Trusted residential and commercial fountain, pond, waterfall, and water-feature specialists serving Southern California since 1992.";
+  "Trusted residential and commercial fountain, pond, waterfall, and water-feature specialists with industry experience since 1992.";
 
 export function constructMetadata({
   title = defaultTitle,

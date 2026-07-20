@@ -100,7 +100,7 @@ export default function FountainMaintenancePage() {
                 </h3>
 
                 <p className="text-xs sm:text-sm text-slate-300">
-                  Our family-operated team has provided reliable water feature care in Orange County since 1992.
+                  Our family-operated team has provided decades of reliable water feature care in Orange County.
                 </p>
 
                 <div className="space-y-3">

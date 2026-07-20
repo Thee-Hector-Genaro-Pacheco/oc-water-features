@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { hashReviewToken } from "@/lib/reviews/tokens";
 
 export async function POST(
   request: NextRequest,
@@ -12,7 +12,7 @@ export async function POST(
       return NextResponse.json({ error: "Token is required" }, { status: 400 });
     }
 
-    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    const tokenHash = hashReviewToken(token);
     const supabase = createAdminClient();
 
     const { data: reqRecord } = await supabase

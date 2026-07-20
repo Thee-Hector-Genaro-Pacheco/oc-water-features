@@ -409,7 +409,7 @@ export default function RequestEstimatePage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-aqua-400" />
-                    <span>30+ Years Experience Since 1992</span>
+                    <span>Industry Experience Since 1992</span>
                   </div>
                 </div>
               </div>

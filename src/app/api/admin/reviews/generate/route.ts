@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendReviewRequest } from "@/lib/email/sendReviewRequest";
+import { generateReviewToken } from "@/lib/reviews/tokens";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Customer not found" }, { status: 404 });
     }
 
-    const rawToken = crypto.randomBytes(32).toString("hex");
-    const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+    // Use token generation utility
+    const { rawToken, tokenHash } = generateReviewToken();
 
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 30);

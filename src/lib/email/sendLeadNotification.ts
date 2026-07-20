@@ -1,3 +1,5 @@
+import { getServerEnv } from "@/lib/env";
+
 export interface LeadNotificationPayload {
   id: string;
   full_name: string;
@@ -12,25 +14,21 @@ export interface LeadNotificationPayload {
 }
 
 /**
- * Server-side email notification abstraction for new lead submissions.
- * Target recipient: BUSINESS_NOTIFICATION_EMAIL (and optional ADMIN_NOTIFICATION_EMAIL copy).
+ * Server-side email notification abstraction for incoming leads.
+ * In development, outputs a non-sensitive metadata log (no messages or secrets).
  */
-export async function sendLeadNotification(lead: LeadNotificationPayload): Promise<{ success: boolean; messageId?: string }> {
-  const businessEmail = process.env.BUSINESS_NOTIFICATION_EMAIL || "info@ocwaterfeatures.com";
-  const adminCopyEmail = process.env.ADMIN_NOTIFICATION_EMAIL || "admin@ocwaterfeatures.com";
+export async function sendLeadNotification(lead: LeadNotificationPayload): Promise<{ success: boolean }> {
+  const env = getServerEnv();
+  const destinationEmail = env.BUSINESS_NOTIFICATION_EMAIL || "info@ocwaterfeatures.com";
 
-  console.log(`[Email Abstraction] Sending new lead notification for Lead #${lead.id} to ${businessEmail} and CC ${adminCopyEmail}`);
-  console.log(`Lead Details: ${lead.full_name} (${lead.phone}, ${lead.email}) from ${lead.city} requesting ${lead.service_requested}`);
+  // Safe development logger: Logs non-sensitive metadata only
+  console.log("[EMAIL_DEV_LOGGER]", {
+    notificationType: "LEAD_NOTIFICATION",
+    destinationEmail,
+    leadId: lead.id,
+    timestamp: new Date().toISOString(),
+    status: "DELIVERY_PENDING_PRODUCTION_PROVIDER_SELECTION",
+  });
 
-  // TODO: Integrate with production email provider (Resend, AWS SES, or SendGrid)
-  // Example implementation with Resend:
-  // await resend.emails.send({
-  //   from: 'OC Water Features Leads <notifications@ocwaterfeatures.com>',
-  //   to: businessEmail,
-  //   cc: adminCopyEmail,
-  //   subject: `New Lead: ${lead.service_requested} in ${lead.city} - ${lead.full_name}`,
-  //   html: `<p>New estimate request from ${lead.full_name}...</p>`
-  // });
-
-  return { success: true, messageId: `mock-lead-msg-${Date.now()}` };
+  return { success: true };
 }

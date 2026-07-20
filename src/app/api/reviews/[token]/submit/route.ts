@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { hashReviewToken } from "@/lib/reviews/tokens";
 
 const reviewSubmitSchema = z.object({
   rating: z.number().min(1).max(5),
@@ -28,7 +28,7 @@ export async function POST(
     }
 
     const data = parseResult.data;
-    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    const tokenHash = hashReviewToken(token);
     const supabase = createAdminClient();
 
     const { data: reqRecord, error: reqError } = await supabase

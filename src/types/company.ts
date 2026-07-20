@@ -1,7 +1,7 @@
 export interface CompanyInfo {
   name: string;
   tagline: string;
-  establishedYear: number;
+  experienceSinceYear: number;
   phonePlaceholder: string;
   phoneRaw: string;
   emailPlaceholder: string;

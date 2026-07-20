@@ -21,7 +21,7 @@ export const Hero: React.FC = () => {
             {/* Experience Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-aqua-500/10 border border-aqua-500/30 text-aqua-300 text-xs sm:text-sm font-semibold tracking-wide uppercase">
               <Award className="w-4 h-4 text-aqua-400" aria-hidden="true" />
-              <span>Family-Operated Since 1992</span>
+              <span>Industry Experience Since 1992</span>
             </div>
 
             {/* Main Headline */}

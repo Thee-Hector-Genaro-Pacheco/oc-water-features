@@ -3,7 +3,7 @@ import { CompanyInfo } from "@/types/company";
 export const companyData: CompanyInfo = {
   name: "OC Water Features",
   tagline: "Professional Water Feature Maintenance & Repair",
-  establishedYear: 1992,
+  experienceSinceYear: 1992,
   phonePlaceholder: "(714) XXX-XXXX",
   phoneRaw: "tel:7140000000",
   emailPlaceholder: "info@ocwaterfeatures.com",
@@ -24,7 +24,7 @@ export const companyData: CompanyInfo = {
     "Tustin"
   ],
   description:
-    "OC Water Features is a family-operated company backed by hands-on industry experience dating to 1992. Our team specializes in maintaining, repairing, restoring, and improving residential and commercial water features throughout Southern California.",
+    "OC Water Features is a family-operated company backed by hands-on industry experience dating back to 1992. Our team specializes in maintaining, repairing, restoring, and improving residential and commercial water features throughout Southern California.",
   shortDescription:
     "Trusted residential and commercial fountain, pond, waterfall, and water-feature specialists serving Southern California.",
   values: [

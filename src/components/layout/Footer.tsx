@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-navy-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} OC Water Features. All rights reserved. Family-operated since 1992.</p>
+          <p>© {new Date().getFullYear()} OC Water Features. All rights reserved. Family-operated water-feature specialists.</p>
           <p className="text-slate-500 text-center md:text-right">
             Specializing strictly in residential & commercial water feature maintenance, repair, and restoration.
           </p>

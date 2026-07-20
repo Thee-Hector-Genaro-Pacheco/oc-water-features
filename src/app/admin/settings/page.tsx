@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 import { requireAdmin } from "@/lib/auth/requireAdmin";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { ShieldCheck, UserCheck, AlertTriangle } from "lucide-react";
+import { ShieldCheck, UserCheck, AlertTriangle, Activity, ChevronRight } from "lucide-react";
 
 export default async function AdminSettingsPage() {
   const { user, profile } = await requireAdmin();
@@ -12,13 +13,24 @@ export default async function AdminSettingsPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
-        <h1 className="text-2xl font-extrabold text-navy-900 tracking-tight">
-          System Settings & Access Controls
-        </h1>
-        <p className="text-sm text-slate-500 mt-1">
-          Administrator profile information and owner security governance.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div>
+          <h1 className="text-2xl font-extrabold text-navy-900 tracking-tight">
+            System Settings & Access Controls
+          </h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Administrator profile information and owner security governance.
+          </p>
+        </div>
+
+        <Link
+          href="/admin/settings/diagnostics"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-sm transition-all"
+        >
+          <Activity className="w-4 h-4 text-aqua-400" />
+          <span>System Diagnostics</span>
+          <ChevronRight className="w-4 h-4 text-slate-400" />
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

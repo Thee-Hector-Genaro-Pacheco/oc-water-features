@@ -70,7 +70,7 @@ export const Navbar: React.FC = () => {
                 OC WATER FEATURES
               </span>
               <span className="text-[10px] sm:text-xs font-semibold text-brand-600 tracking-wider uppercase mt-1">
-                Est. 1992 • SoCal Maintenance & Repair
+                Experience Since 1992 • SoCal Maintenance & Repair
               </span>
             </div>
           </Link>
