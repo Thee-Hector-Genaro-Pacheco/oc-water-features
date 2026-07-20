@@ -1,15 +1,18 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { servicesData } from "@/data/services";
+import { projectsData } from "@/data/projects";
 import { constructMetadata } from "@/lib/metadata";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { ContactCTA } from "@/components/home/ContactCTA";
-import { CheckCircle2, AlertTriangle, ShieldCheck, Phone } from "lucide-react";
+import { CheckCircle2, AlertTriangle, ShieldCheck, Phone, MapPin } from "lucide-react";
 import { companyData } from "@/data/company";
 
 const service = servicesData.find((s) => s.slug === "fountain-repair")!;
+const relatedProject = projectsData.find((p) => p.id === "fountain-pump-repair-anaheim");
 
 export const metadata: Metadata = constructMetadata({
   title: `${service.title} | Orange County Fountain Troubleshooting & Repairs`,
@@ -42,6 +45,32 @@ export default function FountainRepairPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8 space-y-12">
+              {/* Featured Project Real Image Banner */}
+              {relatedProject && (
+                <div className="bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 shadow-xl space-y-0">
+                  <div className="relative aspect-[16/9] w-full bg-slate-950">
+                    <Image
+                      src={relatedProject.image}
+                      alt={relatedProject.imageAlt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 768px"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 text-white z-10">
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-aqua-300 mb-1">
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{relatedProject.location}</span>
+                      </div>
+                      <h3 className="text-lg font-bold">{relatedProject.title}</h3>
+                    </div>
+                  </div>
+                  <div className="p-4 bg-slate-800/90 text-xs text-slate-300 italic border-t border-slate-700/80">
+                    📷 <strong>Recent Project:</strong> {relatedProject.caption}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Repair Benefits</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

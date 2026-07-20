@@ -1,13 +1,14 @@
 export interface ProjectItem {
   id: string;
   title: string;
+  slug: string;
   category: "fountain" | "pond" | "waterfall" | "commercial" | "restoration";
   location: string;
   completionYear: string;
   description: string;
-  servicesProvided: string[];
-  beforeImage?: string;
-  afterImage?: string;
+  image: string;
+  imageAlt: string;
+  caption: string;
   featured: boolean;
-  gradientStyle: string;
+  servicesProvided: string[];
 }
