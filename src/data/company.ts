@@ -95,8 +95,8 @@ export const companyData: CompanyInfo = {
     },
     {
       id: "compliance",
-      title: "CPO Certified",
-      subtitle: "Certified Pool & Spa Operator Standards",
+      title: "Certifications & Licensing",
+      subtitle: "CPO Certified • Westminster Business Licensed • LA County Pool Service Technician",
       icon: "ShieldCheck"
     },
     {
@@ -110,6 +110,42 @@ export const companyData: CompanyInfo = {
       title: "Free Initial Consultation",
       subtitle: "Transparent On-Site & Phone Estimates",
       icon: "FileCheck"
+    }
+  ],
+  // Public-facing credential summaries. Numbers/dates included only where
+  // independently verified (see the sourcing notes at the top of this file).
+  // Never add a street address, geo data, or the credential holder's personal
+  // name here — the source documents list a private/residential address.
+  credentials: [
+    {
+      id: "cpo",
+      shortLabel: "CPO Certified",
+      title: "CPO Certified",
+      description: "Professional certification supporting water-quality and maintenance expertise."
+      // No certification number or expiration date has been independently
+      // verified — do not invent one.
+    },
+    {
+      id: "westminster-business-license",
+      shortLabel: "Westminster Business Licensed",
+      title: "City of Westminster Business License",
+      credentialName: "Business License Tax Certificate",
+      description:
+        "Covers maintenance and repair of water features. This is a business license tax certificate, not a California CSLB contractor license.",
+      numberLabel: "License No.",
+      number: "05118130",
+      validThrough: "September 30, 2026"
+    },
+    {
+      id: "la-county-pool-tech",
+      shortLabel: "LA County Pool Service Technician",
+      title: "Los Angeles County Department of Public Health",
+      credentialName: "Swimming Pool Service Technician",
+      description:
+        "Technician-level credential for swimming pool service. This is a technician credential, not a contractor license.",
+      numberLabel: "Credential No.",
+      number: "PR0173735",
+      validThrough: "June 30, 2027"
     }
   ]
 };

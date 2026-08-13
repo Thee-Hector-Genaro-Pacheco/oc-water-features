@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
-import { Award, ShieldCheck, HeartHandshake, Wrench, Phone } from "lucide-react";
+import { Award, ShieldCheck, HeartHandshake, Wrench, Phone, BadgeCheck } from "lucide-react";
 import { companyData } from "@/data/company";
 import { constructMetadata } from "@/lib/metadata";
 import { Container } from "@/components/layout/Container";
@@ -129,6 +129,50 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Credentials & Certifications */}
+      <section className="py-16 sm:py-24 bg-white border-t border-slate-200/80">
+        <Container>
+          <SectionHeading
+            badge="Verified Credentials"
+            title="Credentials & Certifications"
+            subtitle="Documented, verifiable credentials on file for OC Water Features."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {companyData.credentials.map((cred) => (
+              <div
+                key={cred.id}
+                className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col gap-3"
+              >
+                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+                  <BadgeCheck className="w-5 h-5" aria-hidden="true" />
+                </div>
+
+                <h3 className="text-lg font-bold text-slate-900">{cred.title}</h3>
+
+                {cred.credentialName && (
+                  <p className="text-sm text-slate-500">{cred.credentialName}</p>
+                )}
+
+                {cred.number && cred.numberLabel && (
+                  <p className="text-sm text-slate-700 font-medium">
+                    {cred.numberLabel} {cred.number}
+                  </p>
+                )}
+
+                {cred.validThrough && (
+                  <p className="text-sm text-slate-700 font-medium">
+                    Valid through {cred.validThrough}
+                  </p>
+                )}
+
+                <p className="text-sm text-slate-600 leading-relaxed">{cred.description}</p>
+              </div>
+            ))}
           </div>
         </Container>
       </section>

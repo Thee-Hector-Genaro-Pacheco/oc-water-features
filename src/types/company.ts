@@ -1,3 +1,21 @@
+export interface CredentialInfo {
+  id: string;
+  /** Compact public label for trust badges/footer, e.g. "Westminster Business Licensed". */
+  shortLabel: string;
+  /** Full display heading for the About page card, e.g. "City of Westminster Business License". */
+  title: string;
+  /** Full credential/document name shown under the title, e.g. "Business License Tax Certificate". Omit if not applicable (e.g. CPO). */
+  credentialName?: string;
+  /** One-line, non-overstating description of what the credential covers. */
+  description: string;
+  /** Label preceding the credential number, e.g. "License No." or "Credential No.". Required only when `number` is set. */
+  numberLabel?: string;
+  /** License/credential number. Omit rather than invent one. */
+  number?: string;
+  /** Human-readable expiration date. Omit rather than invent one. */
+  validThrough?: string;
+}
+
 export interface CompanyInfo {
   name: string;
   tagline: string;
@@ -28,4 +46,6 @@ export interface CompanyInfo {
     subtitle: string;
     icon: string;
   }[];
+  /** Verified credentials/certifications on file — see src/data/company.ts for sourcing notes. */
+  credentials: CredentialInfo[];
 }
