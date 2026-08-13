@@ -5,11 +5,13 @@ import { companyData } from "@/data/company";
 import { constructMetadata } from "@/lib/metadata";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { PhoneCallLink } from "@/components/ui/PhoneCallLink";
+import { EmailLink } from "@/components/ui/EmailLink";
 
 export const metadata: Metadata = constructMetadata({
   title: "Contact Us | OC Water Features Southern California",
   description:
-    "Get in touch with OC Water Features. Call (714) XXX-XXXX or request a free estimate for fountain maintenance, pond cleaning, pump repair, and leak detection.",
+    `Get in touch with OC Water Features. Call ${companyData.phoneDisplay} or request a free estimate for fountain maintenance, pond cleaning, pump repair, and leak detection.`,
   canonical: "/contact"
 });
 
@@ -26,7 +28,7 @@ export default function ContactPage() {
               Contact OC Water Features
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-              We welcome inquiries for residential estates, HOA communities, and commercial properties throughout Orange County and Southern California.
+              Have questions about your residential or commercial fountain, pond, or custom water feature? Call us directly or request an estimate.
             </p>
           </div>
         </Container>
@@ -34,16 +36,16 @@ export default function ContactPage() {
 
       <section className="py-16 sm:py-24 bg-white">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Contact Details Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Contact Details */}
             <div className="lg:col-span-7 space-y-8">
               <h2 className="text-2xl font-bold text-slate-900">
                 Direct Contact Information
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <a
-                  href={companyData.phoneRaw}
+                <PhoneCallLink
+                  locationLabel="contact-page"
                   className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 hover:border-brand-500 transition-colors group flex flex-col justify-between"
                 >
                   <div>
@@ -54,12 +56,12 @@ export default function ContactPage() {
                     <p className="text-sm text-slate-600 mt-1">Direct line for consultations & service</p>
                   </div>
                   <span className="text-base font-bold text-brand-600 mt-4 block">
-                    {companyData.phonePlaceholder}
+                    {companyData.phoneDisplay}
                   </span>
-                </a>
+                </PhoneCallLink>
 
-                <a
-                  href={`mailto:${companyData.emailPlaceholder}`}
+                <EmailLink
+                  locationLabel="contact-page"
                   className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 hover:border-brand-500 transition-colors group flex flex-col justify-between"
                 >
                   <div>
@@ -70,9 +72,9 @@ export default function ContactPage() {
                     <p className="text-sm text-slate-600 mt-1">Send photos or detail inquiries</p>
                   </div>
                   <span className="text-sm font-bold text-brand-600 mt-4 block">
-                    {companyData.emailPlaceholder}
+                    {companyData.emailDisplay}
                   </span>
-                </a>
+                </EmailLink>
               </div>
 
               <div className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200/80 space-y-4">
@@ -126,11 +128,11 @@ export default function ContactPage() {
               <div className="border-t border-white/10 pt-4 space-y-2 text-xs text-slate-300">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-aqua-400" />
-                  <span>30+ Years Industry Experience</span>
+                  <span>{companyData.experienceTagline}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-aqua-400" />
-                  <span>{companyData.licensePlaceholder}</span>
+                  <span>{companyData.credentialsTagline}</span>
                 </div>
               </div>
             </div>

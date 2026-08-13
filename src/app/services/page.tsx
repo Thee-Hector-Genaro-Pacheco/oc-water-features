@@ -27,7 +27,7 @@ export default function ServicesPage() {
               Our Professional Services
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-              Family-operated water feature specialists providing expert maintenance, rapid diagnostics, precision repair, and restoration across Southern California with industry experience since 1992.
+              Serving Orange and Los Angeles Counties with industry experience dating back to 1992 — expert water feature creation, maintenance, rapid diagnostics, precision repair, and restoration.
             </p>
           </div>
         </Container>

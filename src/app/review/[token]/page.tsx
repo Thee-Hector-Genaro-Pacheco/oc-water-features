@@ -85,9 +85,9 @@ export default function CustomerReviewPage() {
         <div className="max-w-2xl mx-auto bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xl space-y-8">
           {/* Header */}
           <div className="text-center space-y-3 border-b border-slate-100 pb-6">
-            <div className="relative w-16 h-16 bg-brand-50 rounded-2xl p-2 mx-auto shadow-sm">
+            <div className="relative w-18 h-18 sm:w-20 sm:h-20 bg-brand-50 rounded-2xl p-2 mx-auto shadow-sm">
               <Image
-                src="/logos/logo.png"
+                src="/logos/OCWaterFeatLogo.png"
                 alt="OC Water Features Logo"
                 fill
                 className="object-contain"

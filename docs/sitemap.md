@@ -3,7 +3,7 @@
 ## Page URL Structure
 
 - `/` - Homepage (Hero, Trust Bar, Services, About Preview, Projects, Testimonials, CTA)
-- `/about` - About OC Water Features (Family history, values, craftsmanship since 1992)
+- `/about` - About OC Water Features (Family history, values, industry experience since 1992)
 - `/services` - Master Services Catalog
   - `/services/fountain-maintenance` - Fountain Maintenance & Cleaning
   - `/services/fountain-repair` - Fountain Mechanical & Structural Repair

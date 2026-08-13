@@ -1,1 +1,12 @@
 node_modules
+
+# Build output
+.next/
+out/
+
+# Environment files — never commit real secrets/config.
+# .env.example is intentionally NOT ignored; it should stay in version control
+# as a template.
+.env
+.env.local
+.env.*.local

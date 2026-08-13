@@ -1,55 +1,50 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { companyData } from "@/data/company";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * Builds the sitewide LocalBusiness JSON-LD structured data.
+ *
+ * PHASE 0 SAFETY RULES — do not add fields back in without verified backing data:
+ * - No street address or geo coordinates: the only addresses on file for this
+ *   business are residential/private and must never be published. This is
+ *   modeled as a service-area business (no `address`/`hasMap`), relying on
+ *   `areaServed` instead, per Schema.org/Google guidance for SABs.
+ * - No `openingHoursSpecification`: business hours have not been independently
+ *   verified for this schema (see docs/client-notes.md).
+ * - No `aggregateRating`/`review`: not yet backed by a live review data source.
+ * - No `sameAs`: no verified Google Business Profile / social profile URLs yet.
+ * - No `priceRange`: not verified.
+ * - telephone/email/description are sourced from src/data/company.ts, the
+ *   single source of truth for business information.
+ */
 export function generateLocalBusinessSchema() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
+  const telephone = companyData.phoneRaw.replace(/^tel:/, "");
+
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "OC Water Features",
-    "image": "https://ocwaterfeatures.com/logos/logo.png",
-    "@id": "https://ocwaterfeatures.com/#organization",
-    "url": "https://ocwaterfeatures.com",
-    "telephone": "(714) XXX-XXXX",
-    "email": "info@ocwaterfeatures.com",
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Orange County",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoShape",
-      "region": "Southern California"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "07:00",
-      "closes": "17:00"
-    },
-    "sameAs": [],
+    "name": companyData.name,
+    "image": `${siteUrl}/logos/OCWaterFeatLogo.png`,
+    "@id": `${siteUrl}/#organization`,
+    "url": siteUrl,
+    "telephone": telephone,
+    "email": companyData.emailDisplay,
     "areaServed": [
       {
         "@type": "AdministrativeArea",
-        "name": "Orange County"
+        "name": "Orange County, CA"
       },
       {
         "@type": "AdministrativeArea",
-        "name": "Southern California"
+        "name": "Los Angeles County, CA"
       }
     ],
-    "description": "Family-operated residential and commercial water feature maintenance, repair, and restoration company with industry experience since 1992."
+    "description": companyData.shortDescription
   };
 }

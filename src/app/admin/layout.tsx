@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 import { requireAdmin } from "@/lib/auth/requireAdmin";
 import {
   LayoutDashboard,
@@ -12,6 +13,21 @@ import {
   Inbox,
   Globe
 } from "lucide-react";
+
+// The entire /admin/* route tree is a private, authenticated back office —
+// never a public marketing surface. Block indexing here so it applies to
+// every current and future page under this layout, regardless of whether
+// the individual page defines its own metadata.
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
+};
 
 export default async function AdminLayout({
   children,
@@ -27,9 +43,9 @@ export default async function AdminLayout({
         <div className="space-y-8">
           {/* Header Brand */}
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 bg-white rounded-xl p-1 shrink-0">
+            <div className="relative w-12 h-12 bg-white rounded-xl p-1 shrink-0">
               <Image
-                src="/logos/logo.png"
+                src="/logos/OCWaterFeatLogo.png"
                 alt="OC Water Features Emblem"
                 fill
                 className="object-contain"

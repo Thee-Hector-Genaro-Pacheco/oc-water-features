@@ -9,9 +9,9 @@ import { SectionHeading } from "@/components/layout/SectionHeading";
 import { ContactCTA } from "@/components/home/ContactCTA";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Service Areas | Orange County Water Feature Maintenance & Repair",
+  title: "Service Areas | Orange & Los Angeles County Water Feature Services",
   description:
-    "Discover the Southern California communities served by OC Water Features, including Irvine, Newport Beach, Huntington Beach, Laguna Beach, Anaheim, and surrounding areas.",
+    "Discover the Orange County and Los Angeles County communities served by OC Water Features, including Irvine, Newport Beach, Pasadena, Beverly Hills, Anaheim, and surrounding areas.",
   canonical: "/service-areas"
 });
 
@@ -25,7 +25,7 @@ export default function ServiceAreasPage() {
               Local Coverage
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-              Orange County Service Areas
+              Los Angeles & Orange County Service Areas
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
               We proudly provide residential and commercial water feature maintenance, pump repair, pond cleaning, and leak detection throughout Southern California.
@@ -38,8 +38,8 @@ export default function ServiceAreasPage() {
         <Container>
           <SectionHeading
             badge="Cities Served"
-            title="Our Primary Orange County Communities"
-            subtitle="Don't see your city listed? Contact us—we service all surrounding Southern California neighborhoods."
+            title="Our Primary Orange & Los Angeles County Communities"
+            subtitle="Don't see your city listed? Contact us—we service communities throughout Orange County and Los Angeles County."
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

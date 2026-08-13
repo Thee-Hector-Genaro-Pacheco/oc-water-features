@@ -7,6 +7,7 @@ import { projectsData } from "@/data/projects";
 import { constructMetadata } from "@/lib/metadata";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { PhoneCallLink } from "@/components/ui/PhoneCallLink";
 import { ContactCTA } from "@/components/home/ContactCTA";
 import { CheckCircle2, AlertTriangle, ShieldCheck, Phone, MapPin } from "lucide-react";
 import { companyData } from "@/data/company";
@@ -117,7 +118,7 @@ export default function FountainRepairPage() {
               <div className="sticky top-28 bg-navy-900 text-white p-6 sm:p-8 rounded-2xl border border-navy-800 shadow-xl space-y-6">
                 <div className="flex items-center gap-2 text-xs font-bold text-aqua-400 uppercase tracking-wider">
                   <ShieldCheck className="w-4 h-4" aria-hidden="true" />
-                  <span>Licensed & Insured</span>
+                  <span>{companyData.credentialsTagline}</span>
                 </div>
 
                 <h3 className="text-xl font-bold text-white leading-snug">
@@ -133,13 +134,13 @@ export default function FountainRepairPage() {
                     Request Free Estimate
                   </Button>
 
-                  <a
-                    href={companyData.phoneRaw}
+                  <PhoneCallLink
+                    locationLabel="sidebar-fountain-repair"
                     className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/10"
                   >
                     <Phone className="w-4 h-4 text-aqua-400" aria-hidden="true" />
-                    <span>Call {companyData.phonePlaceholder}</span>
-                  </a>
+                    <span>Call {companyData.phoneDisplay}</span>
+                  </PhoneCallLink>
                 </div>
               </div>
             </div>

@@ -20,13 +20,13 @@ export const faqsData: FAQItem[] = [
   {
     question: "Do you provide free estimates for repairs and maintenance?",
     answer:
-      "Yes! We offer free initial consultations. We can review photos, discuss issues over the phone, or schedule an on-site evaluation across Orange County and surrounding communities.",
+      "Yes! We offer free initial consultations. We can review photos, discuss issues over the phone, or schedule an on-site evaluation across Orange County and Los Angeles County.",
     category: "Estimates"
   },
   {
-    question: "How long has OC Water Features been in business?",
+    question: "How much experience does your team have?",
     answer:
-      "Our family-operated team has hands-on water feature maintenance, repair, and restoration experience in Southern California dating back to 1992—over 30 years of continuous industry expertise.",
+      "Our technicians bring industry experience dating back to 1992, serving Orange County and Los Angeles County with hands-on expertise creating, repairing, restoring, and servicing custom water features.",
     category: "General"
   },
   {

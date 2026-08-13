@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container } from "@/components/layout/Container";
 import { companyData } from "@/data/company";
 import { servicesData } from "@/data/services";
 import { Button } from "@/components/ui/Button";
+import { PhoneCallLink } from "@/components/ui/PhoneCallLink";
+import { EmailLink } from "@/components/ui/EmailLink";
 import { CheckCircle2, Phone, Mail, ShieldCheck, AlertCircle } from "lucide-react";
+import { trackEstimateFormStart, trackEstimateFormSubmit } from "@/lib/analytics/events";
 
 export default function RequestEstimatePage() {
   const [formData, setFormData] = useState({
@@ -34,6 +37,14 @@ export default function RequestEstimatePage() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState<string | null>(null);
+  const hasTrackedFormStart = useRef(false);
+
+  const handleFormFocus = () => {
+    if (!hasTrackedFormStart.current) {
+      hasTrackedFormStart.current = true;
+      trackEstimateFormStart();
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -100,6 +111,10 @@ export default function RequestEstimatePage() {
       }
 
       setSubmitted(true);
+      trackEstimateFormSubmit({
+        serviceType: formData.serviceType,
+        propertyType: formData.propertyType,
+      });
     } catch (err) {
       console.error("Submission error:", err);
       setServerError("Network error. Please check your connection and try again.");
@@ -178,7 +193,7 @@ export default function RequestEstimatePage() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                <form onSubmit={handleSubmit} onFocus={handleFormFocus} noValidate className="space-y-6">
                   <h2 className="text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4">
                     Estimate Details
                   </h2>
@@ -379,27 +394,27 @@ export default function RequestEstimatePage() {
                 </p>
 
                 <div className="space-y-4 pt-2">
-                  <a
-                    href={companyData.phoneRaw}
+                  <PhoneCallLink
+                    locationLabel="request-estimate-sidebar"
                     className="flex items-center gap-3 p-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10"
                   >
                     <Phone className="w-5 h-5 text-aqua-400 shrink-0" aria-hidden="true" />
                     <div>
                       <span className="block text-xs font-semibold text-slate-300">Call Us Directly</span>
-                      <span className="font-bold text-white text-base">{companyData.phonePlaceholder}</span>
+                      <span className="font-bold text-white text-base">{companyData.phoneDisplay}</span>
                     </div>
-                  </a>
+                  </PhoneCallLink>
 
-                  <a
-                    href={`mailto:${companyData.emailPlaceholder}`}
+                  <EmailLink
+                    locationLabel="request-estimate-sidebar"
                     className="flex items-center gap-3 p-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10"
                   >
                     <Mail className="w-5 h-5 text-aqua-400 shrink-0" aria-hidden="true" />
                     <div>
                       <span className="block text-xs font-semibold text-slate-300">Email Inquiries</span>
-                      <span className="font-bold text-white text-sm">{companyData.emailPlaceholder}</span>
+                      <span className="font-bold text-white text-sm">{companyData.emailDisplay}</span>
                     </div>
-                  </a>
+                  </EmailLink>
                 </div>
 
                 <div className="border-t border-white/10 pt-4 space-y-2 text-xs text-slate-300">
@@ -409,7 +424,7 @@ export default function RequestEstimatePage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-aqua-400" />
-                    <span>Industry Experience Since 1992</span>
+                    <span>{companyData.serviceAreaTagline}</span>
                   </div>
                 </div>
               </div>
