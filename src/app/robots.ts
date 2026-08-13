@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
       // src/app/admin/layout.tsx and src/app/review/layout.tsx), since robots.txt
       // disallow rules do not reliably prevent a URL from being indexed if it is
       // linked to from elsewhere.
-      disallow: ["/admin/", "/api/", "/review/"],
+      disallow: ["/admin", "/api", "/review"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

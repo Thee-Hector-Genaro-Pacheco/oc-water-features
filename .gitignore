@@ -3,6 +3,11 @@ node_modules
 # Build output
 .next/
 out/
+*.tsbuildinfo
+
+# OS junk
+.DS_Store
+**/.DS_Store
 
 # Environment files — never commit real secrets/config.
 # .env.example is intentionally NOT ignored; it should stay in version control
