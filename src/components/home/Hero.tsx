@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { Phone, ShieldCheck, Award, ArrowRight } from "lucide-react";
+import { Phone, ShieldCheck, ArrowRight } from "lucide-react";
 import { companyData } from "@/data/company";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { PhoneCallLink } from "@/components/ui/PhoneCallLink";
 
 export const Hero: React.FC = () => {
   return (
@@ -20,8 +21,9 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
             {/* Experience Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-aqua-500/10 border border-aqua-500/30 text-aqua-300 text-xs sm:text-sm font-semibold tracking-wide uppercase">
-              <Award className="w-4 h-4 text-aqua-400" aria-hidden="true" />
-              <span>Industry Experience Since 1992</span>
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-aqua-300">
+                {companyData.serviceAreaTagline}
+              </span>
             </div>
 
             {/* Main Headline */}
@@ -41,22 +43,20 @@ export const Hero: React.FC = () => {
                 <ArrowRight className="w-5 h-5 ml-2" aria-hidden="true" />
               </Button>
 
-              <Button
-                href={companyData.phoneRaw}
-                variant="secondary"
-                size="lg"
-                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 border-white/20 text-white"
+              <PhoneCallLink
+                locationLabel="hero"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-base transition-colors"
               >
-                <Phone className="w-5 h-5 mr-2 text-aqua-400" aria-hidden="true" />
-                <span>Call Now: {companyData.phonePlaceholder}</span>
-              </Button>
+                <Phone className="w-5 h-5 text-aqua-400" aria-hidden="true" />
+                <span>Call Now: {companyData.phoneDisplay}</span>
+              </PhoneCallLink>
             </div>
 
             {/* Trust Highlights */}
             <div className="pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs sm:text-sm text-slate-300">
               <div className="flex items-center justify-center lg:justify-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-aqua-400 shrink-0" aria-hidden="true" />
-                <span>Licensed & Insured</span>
+                <span>{companyData.credentialsTagline}</span>
               </div>
               <div className="flex items-center justify-center lg:justify-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-aqua-400 shrink-0" aria-hidden="true" />
@@ -74,9 +74,9 @@ export const Hero: React.FC = () => {
             <div className="relative mx-auto max-w-md lg:max-w-none rounded-2xl bg-gradient-to-tr from-brand-900/90 to-slate-900/90 p-6 sm:p-8 border border-white/15 shadow-2xl backdrop-blur-xl">
               {/* Top Card Banner Header */}
               <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
-                <div className="relative w-14 h-14 bg-white rounded-xl p-2 shrink-0 shadow-md">
+                <div className="relative w-16 h-16 sm:w-18 sm:h-18 bg-white rounded-2xl p-2 shrink-0 shadow-md">
                   <Image
-                    src="/logos/logo.png"
+                    src="/logos/OCWaterFeatLogo.png"
                     alt="OC Water Features Emblem"
                     fill
                     className="object-contain"
@@ -99,8 +99,8 @@ export const Hero: React.FC = () => {
                     <span className="font-bold text-sm">30+</span>
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-white">30+ Years Industry Experience</h3>
-                    <p className="text-xs text-slate-300">Hands-on knowledge dating back to 1992</p>
+                    <h3 className="text-sm font-bold text-white">{companyData.serviceAreaTagline}</h3>
+                    <p className="text-xs text-slate-300">{companyData.experienceTagline} • {companyData.credentialsTagline}</p>
                   </div>
                 </div>
 

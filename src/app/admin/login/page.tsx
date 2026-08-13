@@ -52,9 +52,9 @@ function LoginFormContent() {
   return (
     <div className="w-full max-w-md bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-2xl space-y-8">
       <div className="text-center space-y-3">
-        <div className="relative w-16 h-16 bg-brand-50 rounded-2xl p-2 mx-auto shadow-sm">
+        <div className="relative w-18 h-18 sm:w-20 sm:h-20 bg-brand-50 rounded-2xl p-2 mx-auto shadow-sm">
           <Image
-            src="/logos/logo.png"
+            src="/logos/OCWaterFeatLogo.png"
             alt="OC Water Features Logo"
             fill
             className="object-contain"

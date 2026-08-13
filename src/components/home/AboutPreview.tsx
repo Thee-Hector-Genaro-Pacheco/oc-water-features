@@ -16,9 +16,9 @@ export const AboutPreview: React.FC = () => {
               <div className="absolute top-0 right-0 w-48 h-48 bg-aqua-500/10 rounded-full blur-2xl pointer-events-none" />
 
               <div className="flex items-center gap-4 mb-6">
-                <div className="relative w-16 h-16 bg-white rounded-2xl p-2 shrink-0 shadow-lg">
+                <div className="relative w-18 h-18 sm:w-20 sm:h-20 bg-white rounded-2xl p-2 shrink-0 shadow-lg">
                   <Image
-                    src="/logos/logo.png"
+                    src="/logos/OCWaterFeatLogo.png"
                     alt="OC Water Features Seal"
                     fill
                     className="object-contain"
@@ -26,7 +26,7 @@ export const AboutPreview: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-aqua-400 uppercase tracking-widest block">
-                    Experience Since 1992
+                    {companyData.serviceAreaTagline}
                   </span>
                   <h3 className="text-xl font-bold text-white">Family-Operated</h3>
                 </div>
@@ -39,7 +39,7 @@ export const AboutPreview: React.FC = () => {
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <span className="block font-bold text-white text-lg">30+</span>
-                  <span className="text-slate-300">Years in SoCal</span>
+                  <span className="text-slate-300">Years Industry Experience</span>
                 </div>
                 <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                   <span className="block font-bold text-white text-lg">100%</span>
@@ -56,7 +56,7 @@ export const AboutPreview: React.FC = () => {
             </span>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug">
-              Over 30 Years of Dedicated Water Feature Excellence
+              Water Feature Expertise Backed by Industry Experience Since 1992
             </h2>
 
             {/* Exact Company Description */}

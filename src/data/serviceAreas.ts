@@ -19,5 +19,8 @@ export const serviceAreasData: ServiceCity[] = [
   { name: "Tustin", county: "Orange County", popularServices: ["Courtyard Water Walls", "Fountain Cleaning", "Chemical Balancing"] },
   { name: "Laguna Niguel", county: "Orange County", popularServices: ["Pond Care", "Fountain Restoration", "Auto-Fill Systems"] },
   { name: "Aliso Viejo", county: "Orange County", popularServices: ["HOA Fountains", "Waterfall Maintenance", "Pump Repair"] },
-  { name: "Lake Forest", county: "Orange County", popularServices: ["Resort & HOA Pools", "Fountain Maintenance", "Leak Sealing"] }
+  { name: "Lake Forest", county: "Orange County", popularServices: ["Resort & HOA Pools", "Fountain Maintenance", "Leak Sealing"] },
+  { name: "Pasadena", county: "Los Angeles County", popularServices: ["Estate Fountain Care", "Koi Pond Maintenance", "Pump Repair"] },
+  { name: "Beverly Hills", county: "Los Angeles County", popularServices: ["Estate Water Features", "Fountain Restoration", "Leak Detection"] },
+  { name: "Long Beach", county: "Los Angeles County", popularServices: ["Commercial Water Features", "Pump Replacement", "Fountain Maintenance"] }
 ];

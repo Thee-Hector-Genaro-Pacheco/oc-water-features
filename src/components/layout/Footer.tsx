@@ -5,6 +5,8 @@ import { Phone, Mail, MapPin, ShieldCheck } from "lucide-react";
 import { companyData } from "@/data/company";
 import { servicesData } from "@/data/services";
 import { Container } from "./Container";
+import { PhoneCallLink } from "@/components/ui/PhoneCallLink";
+import { EmailLink } from "@/components/ui/EmailLink";
 
 export const Footer: React.FC = () => {
   return (
@@ -16,10 +18,10 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
           {/* Col 1: Brand & About */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 shrink-0 bg-white/10 rounded-lg p-1">
+            <Link href="/" className="flex items-center gap-3.5 group">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-white/10 rounded-xl p-1.5 shadow-sm">
                 <Image
-                  src="/logos/logo.png"
+                  src="/logos/OCWaterFeatLogo.png"
                   alt="OC Water Features Logo"
                   fill
                   className="object-contain"
@@ -31,12 +33,12 @@ export const Footer: React.FC = () => {
             </Link>
 
             <p className="text-sm text-slate-400 leading-relaxed">
-              Family-operated Southern California water-feature specialists with industry experience dating back to 1992. Specializing in residential and commercial fountain, pond, and waterfall maintenance and repair.
+              {companyData.serviceAreaTagline}. CPO-certified specialists in water feature creation, repair, maintenance, and restoration.
             </p>
 
             <div className="flex items-center gap-2 text-xs text-aqua-400 bg-navy-950/80 px-3 py-2 rounded-md border border-navy-800 w-fit">
               <ShieldCheck className="w-4 h-4 text-aqua-400 shrink-0" aria-hidden="true" />
-              <span>{companyData.licensePlaceholder}</span>
+              <span>{companyData.credentialsTagline}</span>
             </div>
           </div>
 
@@ -99,27 +101,27 @@ export const Footer: React.FC = () => {
               Direct Contact
             </h3>
             <div className="space-y-3.5 text-sm">
-              <a
-                href={companyData.phoneRaw}
+              <PhoneCallLink
+                locationLabel="footer"
                 className="flex items-start gap-3 text-slate-300 hover:text-aqua-300 transition-colors"
               >
                 <Phone className="w-5 h-5 text-aqua-400 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <span className="block font-bold text-white">Call Us Today</span>
-                  <span>{companyData.phonePlaceholder}</span>
+                  <span>{companyData.phoneDisplay}</span>
                 </div>
-              </a>
+              </PhoneCallLink>
 
-              <a
-                href={`mailto:${companyData.emailPlaceholder}`}
+              <EmailLink
+                locationLabel="footer"
                 className="flex items-start gap-3 text-slate-300 hover:text-aqua-300 transition-colors"
               >
                 <Mail className="w-5 h-5 text-aqua-400 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <span className="block font-bold text-white">Email Inquiries</span>
-                  <span>{companyData.emailPlaceholder}</span>
+                  <span>{companyData.emailDisplay}</span>
                 </div>
-              </a>
+              </EmailLink>
 
               <div className="flex items-start gap-3 text-slate-400">
                 <MapPin className="w-5 h-5 text-aqua-400 shrink-0 mt-0.5" aria-hidden="true" />

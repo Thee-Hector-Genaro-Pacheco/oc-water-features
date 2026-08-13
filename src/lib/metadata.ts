@@ -1,15 +1,16 @@
 import { Metadata } from "next";
+import { companyData } from "@/data/company";
 
-const siteUrl = "https://ocwaterfeatures.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
 const defaultTitle = "OC Water Features | Professional Water Feature Maintenance & Repair";
-const defaultDescription =
-  "Trusted residential and commercial fountain, pond, waterfall, and water-feature specialists with industry experience since 1992.";
+const defaultDescription = companyData.shortDescription;
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
 export function constructMetadata({
   title = defaultTitle,
   description = defaultDescription,
   canonical = "/",
-  ogImage = "/logos/logo.png"
+  ogImage = "/logos/OCWaterFeatLogo.png"
 }: {
   title?: string;
   description?: string;
@@ -59,5 +60,12 @@ export function constructMetadata({
         "max-snippet": -1,
       },
     },
+    // Google Search Console HTML-tag verification. Only emitted when
+    // GOOGLE_SITE_VERIFICATION is set (see .env.example) — Hector must obtain
+    // this value from Search Console after adding the property. Absent by
+    // default so no fake/placeholder verification tag is ever shipped.
+    ...(googleSiteVerification
+      ? { verification: { google: googleSiteVerification } }
+      : {}),
   };
 }

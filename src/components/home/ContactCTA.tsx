@@ -3,6 +3,7 @@ import { Phone, FileText, Clock, ShieldCheck } from "lucide-react";
 import { companyData } from "@/data/company";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { PhoneCallLink } from "@/components/ui/PhoneCallLink";
 
 export const ContactCTA: React.FC = () => {
   return (
@@ -43,13 +44,13 @@ export const ContactCTA: React.FC = () => {
                 <span>Request Free Estimate</span>
               </Button>
 
-              <a
-                href={companyData.phoneRaw}
+              <PhoneCallLink
+                locationLabel="contact-cta-section"
                 className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-base border border-white/20 transition-all text-center"
               >
                 <Phone className="w-5 h-5 text-aqua-400" aria-hidden="true" />
-                <span>Call {companyData.phonePlaceholder}</span>
-              </a>
+                <span>Call {companyData.phoneDisplay}</span>
+              </PhoneCallLink>
             </div>
           </div>
         </div>

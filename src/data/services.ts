@@ -55,7 +55,7 @@ export const servicesData: ServiceItem[] = [
     shortDescription:
       "Expert troubleshooting and repairs for non-functioning pumps, leaks, cracked basins, faulty auto-fills, and electrical supply lines.",
     fullDescription:
-      "When your fountain stops flowing, leaks water, or makes grinding noises, our experienced technicians diagnose the underlying mechanical or structural issue promptly. Drawing on industry experience dating back to 1992, we restore reliable operation to fountains of all sizes.",
+      "When your fountain stops flowing, leaks water, or makes grinding noises, our experienced technicians diagnose the underlying mechanical or structural issue promptly. Drawing on industry experience dating back to 1992 and serving Orange and Los Angeles Counties, we restore reliable operation to fountains of all sizes.",
     iconName: "Wrench",
     benefits: [
       "Accurate root-cause diagnostics saving unnecessary replacement costs",
