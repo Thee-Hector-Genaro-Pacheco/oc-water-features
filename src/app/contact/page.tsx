@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock, ShieldCheck, FileText } from "lucide-react";
+import { Phone, Mail, MapPin, ShieldCheck, FileText } from "lucide-react";
 import { companyData } from "@/data/company";
 import { constructMetadata } from "@/lib/metadata";
 import { Container } from "@/components/layout/Container";
@@ -90,18 +90,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 pt-4 border-t border-slate-200">
-                  <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 mt-1">
-                    <Clock className="w-5 h-5" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-slate-900">Business Hours</h3>
-                    <p className="text-sm text-slate-600 mt-1">
-                      Monday – Saturday: 7:00 AM – 5:00 PM<br />
-                      Sunday: Closed (Emergency response by arrangement)
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
 

@@ -36,9 +36,9 @@ export const Footer: React.FC = () => {
               {companyData.serviceAreaTagline}. CPO-certified specialists in water feature creation, repair, maintenance, and restoration.
             </p>
 
-            <div className="flex items-center gap-2 text-xs text-aqua-400 bg-navy-950/80 px-3 py-2 rounded-md border border-navy-800 w-fit">
-              <ShieldCheck className="w-4 h-4 text-aqua-400 shrink-0" aria-hidden="true" />
-              <span>{companyData.credentialsTagline}</span>
+            <div className="flex items-start gap-2 text-xs text-aqua-400">
+              <ShieldCheck className="w-4 h-4 text-aqua-400 shrink-0 mt-0.5" aria-hidden="true" />
+              <span>CPO Certified • Westminster Business Licensed • LA County Pool Service Technician</span>
             </div>
           </div>
 
