@@ -1,10 +1,37 @@
 import React from "react";
-import { Star, Quote, CheckCircle } from "lucide-react";
+import { Star, Quote, CheckCircle, MessageSquareHeart } from "lucide-react";
 import { testimonialsData } from "@/data/testimonials";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 
+// Only ever render reviews explicitly confirmed as real customer
+// submissions — see the content-safety note in src/data/testimonials.ts.
+const publishedTestimonials = testimonialsData.filter((t) => t.published);
+
 export const Testimonials: React.FC = () => {
+  if (publishedTestimonials.length === 0) {
+    return (
+      <section className="py-16 sm:py-24 bg-white relative">
+        <Container>
+          <SectionHeading
+            badge="Client Reviews"
+            title="Trusted Across Southern California"
+            subtitle="See what residential homeowners and commercial property managers say about our water feature service."
+          />
+
+          <div className="max-w-xl mx-auto text-center bg-slate-50 rounded-2xl border border-slate-200/80 p-8 sm:p-12">
+            <MessageSquareHeart className="w-10 h-10 text-brand-400 mx-auto mb-4" aria-hidden="true" />
+            <h3 className="text-lg font-bold text-slate-900 mb-2">Customer Reviews Coming Soon</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              OC Water Features is currently collecting feedback from longstanding customers.
+              Verified reviews will appear here once available.
+            </p>
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 sm:py-24 bg-white relative">
       <Container>
@@ -15,7 +42,7 @@ export const Testimonials: React.FC = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonialsData.map((t) => (
+          {publishedTestimonials.map((t) => (
             <div
               key={t.id}
               className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between"
