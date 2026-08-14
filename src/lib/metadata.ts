@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { companyData } from "@/data/company";
+import { getSiteUrl } from "@/lib/env";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
+const siteUrl = getSiteUrl();
 const defaultTitle = "OC Water Features | Professional Water Feature Maintenance & Repair";
 const defaultDescription = companyData.shortDescription;
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;

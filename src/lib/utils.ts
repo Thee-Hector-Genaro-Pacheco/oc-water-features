@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { companyData } from "@/data/company";
+import { getSiteUrl } from "@/lib/env";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -23,7 +24,7 @@ export function cn(...inputs: ClassValue[]) {
  *   single source of truth for business information.
  */
 export function generateLocalBusinessSchema() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
+  const siteUrl = getSiteUrl();
   const telephone = companyData.phoneRaw.replace(/^tel:/, "");
 
   return {

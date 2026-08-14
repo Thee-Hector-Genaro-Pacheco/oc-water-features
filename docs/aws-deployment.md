@@ -19,7 +19,7 @@ In AWS Amplify Console under **App settings > Environment variables**, add:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `SUPABASE_SECRET_KEY`
-- `NEXT_PUBLIC_SITE_URL` (e.g. `https://ocwaterfeatures.com`)
+- `NEXT_PUBLIC_SITE_URL` (production value: `https://www.ocwaterfeaturesinc.com`)
 - `BUSINESS_NOTIFICATION_EMAIL`
 - `ADMIN_NOTIFICATION_EMAIL`
 - `GOOGLE_REVIEW_URL`

@@ -107,6 +107,24 @@ export function getServerEnv(): ServerEnv {
 }
 
 /**
+ * Verified production domain. Used only as a fallback when
+ * NEXT_PUBLIC_SITE_URL is unset in the current environment — every
+ * SEO-surface consumer (metadata, sitemap, robots, structured data,
+ * lead-notification links) should call getSiteUrl() below instead of
+ * duplicating this fallback, so it only needs to be correct in one place.
+ */
+export const PRODUCTION_SITE_URL = "https://www.ocwaterfeaturesinc.com";
+
+/**
+ * Single source of truth for the site's public base URL (no trailing
+ * slash). Prefer this over reading process.env.NEXT_PUBLIC_SITE_URL
+ * directly wherever an absolute production URL is needed.
+ */
+export function getSiteUrl(): string {
+  return process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_SITE_URL;
+}
+
+/**
  * Helper to check if Supabase has valid non-placeholder credentials configured.
  */
 export function isSupabaseConfigured(): boolean {

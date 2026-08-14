@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/env";
 
 export const dynamic = "force-static";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
+const siteUrl = getSiteUrl();
 
 export default function robots(): MetadataRoute.Robots {
   return {

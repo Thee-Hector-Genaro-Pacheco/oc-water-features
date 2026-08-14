@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { getServerEnv, getPublicEnv } from "@/lib/env";
+import { getServerEnv, getSiteUrl } from "@/lib/env";
 
 export interface LeadNotificationPayload {
   id: string;
@@ -39,13 +39,12 @@ const processedLeadIds = new Set<string>();
  */
 export async function sendLeadNotification(lead: LeadNotificationPayload): Promise<LeadNotificationResult> {
   const serverEnv = getServerEnv();
-  const publicEnv = getPublicEnv();
 
   const businessEmail = serverEnv.BUSINESS_NOTIFICATION_EMAIL || "ocwaterfeatures@live.com";
   const adminEmail = serverEnv.ADMIN_NOTIFICATION_EMAIL || "hect24pacheco@gmail.com";
   const recipients = Array.from(new Set([businessEmail, adminEmail].filter(Boolean)));
 
-  const siteUrl = publicEnv.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
+  const siteUrl = getSiteUrl();
   const adminLink = `${siteUrl}/admin/leads/${lead.id}`;
 
   const subject = `New Website Lead — ${lead.service_requested || "General Request"} — ${lead.city || "Orange County"}`;

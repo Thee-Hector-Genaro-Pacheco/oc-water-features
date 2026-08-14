@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { servicesData } from "@/data/services";
+import { getSiteUrl } from "@/lib/env";
 
 export const dynamic = "force-static";
 
@@ -9,7 +10,7 @@ export const dynamic = "force-static";
 // from indexing separately via robots.ts and per-route `robots: noindex`
 // metadata (see src/app/admin/layout.tsx and src/app/review/layout.tsx).
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ocwaterfeatures.com";
+  const baseUrl = getSiteUrl();
 
   const serviceRoutes = servicesData.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,

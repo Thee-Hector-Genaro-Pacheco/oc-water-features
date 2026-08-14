@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { getServerEnv, getPublicEnv } from "@/lib/env";
+import { getServerEnv, getSiteUrl } from "@/lib/env";
 
 export interface ReviewRequestNotificationPayload {
   customerName: string;
@@ -28,10 +28,9 @@ export interface ReviewRequestNotificationResult {
 export async function sendReviewRequest(
   payload: ReviewRequestNotificationPayload
 ): Promise<ReviewRequestNotificationResult> {
-  const publicEnv = getPublicEnv();
   const serverEnv = getServerEnv();
 
-  const siteUrl = publicEnv.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = getSiteUrl();
   const reviewLink = `${siteUrl}/review/${payload.rawToken}`;
 
   const { RESEND_API_KEY, EMAIL_FROM_ADDRESS } = serverEnv;

@@ -36,7 +36,7 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...<your-publishable-key>
 SUPABASE_SECRET_KEY=sb_secret_...<your-secret-key>
 
 # Application URL & Settings
-NEXT_PUBLIC_SITE_URL=https://ocwaterfeatures.com
+NEXT_PUBLIC_SITE_URL=https://www.ocwaterfeaturesinc.com
 BUSINESS_NOTIFICATION_EMAIL=info@ocwaterfeatures.com
 ADMIN_NOTIFICATION_EMAIL=admin@ocwaterfeatures.com
 GOOGLE_REVIEW_URL=https://g.page/r/your-google-place-id/review
