@@ -22,14 +22,14 @@ async function runSeed() {
 
   // 3. Environment Credentials Check
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const secretKey = process.env.SUPABASE_SECRET_KEY;
 
-  if (!supabaseUrl || !serviceKey || supabaseUrl.includes("placeholder") || serviceKey.includes("placeholder")) {
-    console.error("ERROR: Valid NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required to run seed script.");
+  if (!supabaseUrl || !secretKey || supabaseUrl.includes("placeholder") || secretKey.includes("placeholder")) {
+    console.error("ERROR: Valid NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY are required to run seed script.");
     process.exit(1);
   }
 
-  const adminSupabase = createClient(supabaseUrl, serviceKey, {
+  const adminSupabase = createClient(supabaseUrl, secretKey, {
     auth: { persistSession: false },
   });
 

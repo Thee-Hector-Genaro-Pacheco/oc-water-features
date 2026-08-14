@@ -22,8 +22,10 @@ export default function CustomerReviewPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const googleReviewUrl =
-    process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL || "https://g.page/r/placeholder/review";
+  // No fabricated fallback: when unset, the "Leave a Google Review" CTA
+  // below simply does not render rather than linking to a fake/placeholder
+  // Google URL.
+  const googleReviewUrl = process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL;
 
   useEffect(() => {
     if (token) {
@@ -115,27 +117,29 @@ export default function CustomerReviewPage() {
                 Your feedback helps our family business maintain high quality standards across Southern California.
               </p>
 
-              {/* Ungated Google Review Option */}
-              <div className="p-6 rounded-2xl bg-brand-50 border border-brand-200 text-center space-y-4">
-                <h3 className="text-base font-bold text-navy-900">
-                  Would you also share your experience on Google?
-                </h3>
-                <p className="text-xs text-slate-600">
-                  Posting your review on Google helps other Southern California homeowners and business owners find reliable water feature care.
-                </p>
+              {/* Ungated Google Review Option — only rendered once a real Google Business Profile URL is configured */}
+              {googleReviewUrl && (
+                <div className="p-6 rounded-2xl bg-brand-50 border border-brand-200 text-center space-y-4">
+                  <h3 className="text-base font-bold text-navy-900">
+                    Would you also share your experience on Google?
+                  </h3>
+                  <p className="text-xs text-slate-600">
+                    Posting your review on Google helps other Southern California homeowners and business owners find reliable water feature care.
+                  </p>
 
-                <div className="pt-1">
-                  <a
-                    href={googleReviewUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all"
-                  >
-                    <span>Leave a Google Review</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  <div className="pt-1">
+                    <a
+                      href={googleReviewUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all"
+                    >
+                      <span>Leave a Google Review</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
