@@ -14,8 +14,8 @@ export default async function DiagnosticsPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const siteUrlConfigured = Boolean(siteUrl && !siteUrl.includes("placeholder"));
 
-  const googleReviewUrl = process.env.GOOGLE_REVIEW_URL;
-  const googleReviewConfigured = Boolean(googleReviewUrl && !googleReviewUrl.includes("placeholder"));
+  const googleReviewUrl = process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL;
+  const googleReviewConfigured = Boolean(googleReviewUrl);
 
   const businessEmail = process.env.BUSINESS_NOTIFICATION_EMAIL;
   const businessEmailConfigured = Boolean(businessEmail && !businessEmail.includes("placeholder"));
@@ -154,7 +154,7 @@ export default async function DiagnosticsPage() {
 
             <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100">
               <span className="font-semibold text-slate-700">Google Review URL Configured:</span>
-              <span className="font-bold">{googleReviewConfigured ? "Yes" : "Default Placeholder"}</span>
+              <span className="font-bold">{googleReviewConfigured ? "Yes" : "Not Set"}</span>
             </div>
 
             <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100">

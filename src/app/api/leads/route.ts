@@ -104,7 +104,16 @@ export async function POST(request: NextRequest) {
         new_status: "new",
       });
 
-      await sendLeadNotification(leadRecord);
+      // The lead is already safely persisted above — a notification failure
+      // must never turn this into an error response or lose the lead. Any
+      // failure is logged server-side (see sendLeadNotification) so it can
+      // be followed up on without exposing provider errors to the customer.
+      const notificationResult = await sendLeadNotification(leadRecord);
+      if (!notificationResult.success) {
+        console.error("[API /leads] Lead saved but notification delivery failed:", {
+          leadId: leadRecord.id,
+        });
+      }
     }
 
     return NextResponse.json(
