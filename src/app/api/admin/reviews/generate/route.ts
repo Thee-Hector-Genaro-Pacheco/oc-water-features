@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendReviewRequest } from "@/lib/email/sendReviewRequest";
 import { generateReviewToken } from "@/lib/reviews/tokens";
+import { requireAdmin } from "@/lib/auth/requireAdmin";
 
 export async function POST(request: NextRequest) {
+  // Service-role mutation (bypasses RLS via createAdminClient) — must be
+  // gated by the same admin-auth guard used elsewhere before any DB write
+  // or email send below.
+  await requireAdmin();
+
   try {
     const { customerId } = await request.json();
 

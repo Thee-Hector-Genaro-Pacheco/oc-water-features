@@ -12,10 +12,11 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       // Defense in depth only — the definitive protection for these routes is the
       // per-page `robots: { index: false, follow: false }` metadata (see
-      // src/app/admin/layout.tsx and src/app/review/layout.tsx), since robots.txt
-      // disallow rules do not reliably prevent a URL from being indexed if it is
-      // linked to from elsewhere.
-      disallow: ["/admin", "/api", "/review"],
+      // src/app/admin/layout.tsx, src/app/review/layout.tsx, and
+      // src/app/questionnaire/layout.tsx), since robots.txt disallow rules do
+      // not reliably prevent a URL from being indexed if it is linked to from
+      // elsewhere.
+      disallow: ["/admin", "/api", "/review", "/questionnaire"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

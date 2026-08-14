@@ -106,5 +106,5 @@ If `SUPABASE_SECRET_KEY` or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is accidental
 
 1. Navigate to **Project Settings** > **API**.
 2. Revoke and regenerate the exposed publishable and/or secret key.
-3. Immediately update environment variables in your local `.env.local` and host settings (AWS Amplify).
+3. Immediately update environment variables in your local `.env.local` and host settings (Vercel Project Settings — see `docs/vercel-deployment.md`).
 4. Redeploy application.

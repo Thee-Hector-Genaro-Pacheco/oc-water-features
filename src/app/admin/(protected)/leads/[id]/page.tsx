@@ -13,7 +13,9 @@ import {
   CheckCircle2,
   Clock,
   Plus,
-  MessageSquare
+  MessageSquare,
+  ClipboardList,
+  Send
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -58,6 +60,28 @@ export interface LeadActivity {
   created_at: string;
 }
 
+export interface QuestionnaireDetail {
+  id: string;
+  status: string;
+  service_requested?: string[];
+  service_requested_other_detail?: string;
+  property_type?: string;
+  water_feature_age?: string;
+  issue_duration?: string;
+  operating_condition?: string;
+  leak_condition?: string;
+  previous_service_status?: string;
+  previous_service_explanation?: string;
+  maintenance_frequency?: string;
+  preferred_contact_method?: string;
+  preferred_contact_time?: string;
+  additional_notes?: string;
+  sent_at?: string;
+  opened_at?: string;
+  submitted_at?: string;
+  expires_at: string;
+}
+
 export default function AdminLeadDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -65,9 +89,12 @@ export default function AdminLeadDetailPage() {
 
   const [lead, setLead] = useState<LeadDetail | null>(null);
   const [activities, setActivities] = useState<LeadActivity[]>([]);
+  const [questionnaire, setQuestionnaire] = useState<QuestionnaireDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [newNote, setNewNote] = useState("");
   const [updating, setUpdating] = useState(false);
+  const [sendingQuestionnaire, setSendingQuestionnaire] = useState(false);
+  const [questionnaireError, setQuestionnaireError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
   const fetchLeadData = useCallback(async () => {
@@ -86,8 +113,15 @@ export default function AdminLeadDetailPage() {
       .eq("lead_id", leadId)
       .order("created_at", { ascending: false });
 
+    const { data: questionnaireData } = await supabase
+      .from("questionnaires")
+      .select("*")
+      .eq("lead_id", leadId)
+      .maybeSingle();
+
     if (leadData) setLead(leadData as LeadDetail);
     if (activityData) setActivities(activityData as LeadActivity[]);
+    setQuestionnaire((questionnaireData as QuestionnaireDetail) || null);
 
     setLoading(false);
   }, [leadId]);
@@ -122,6 +156,42 @@ export default function AdminLeadDetailPage() {
       fetchLeadData();
     }
     setUpdating(false);
+  };
+
+  const handleSendQuestionnaire = async () => {
+    setSendingQuestionnaire(true);
+    setQuestionnaireError(null);
+    setActionSuccess(null);
+
+    try {
+      const response = await fetch("/api/admin/questionnaires/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ leadId }),
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        setQuestionnaireError(resData.error || "Unable to send questionnaire.");
+        setSendingQuestionnaire(false);
+        return;
+      }
+
+      const deliveryNote =
+        resData.deliveryMode === "sent"
+          ? "Questionnaire email sent."
+          : resData.deliveryMode === "dev_logger"
+          ? "Questionnaire queued (email not configured — dev logger only)."
+          : "Questionnaire link generated, but the email failed to send.";
+
+      setActionSuccess(deliveryNote);
+      fetchLeadData();
+    } catch {
+      setQuestionnaireError("Network error. Please try again.");
+    } finally {
+      setSendingQuestionnaire(false);
+    }
   };
 
   const handleAddNote = async (e: React.FormEvent) => {
@@ -325,6 +395,81 @@ export default function AdminLeadDetailPage() {
 
         {/* Right Column: Timeline & Notes */}
         <div className="lg:col-span-5 space-y-6">
+          {/* Customer Intake Questionnaire */}
+          <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-base font-bold text-navy-900 flex items-center gap-2">
+                <ClipboardList className="w-4 h-4 text-brand-600" />
+                <span>Intake Questionnaire</span>
+              </h3>
+              {questionnaire && (
+                <span
+                  className={`inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                    questionnaire.status === "submitted"
+                      ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                      : questionnaire.status === "expired" || questionnaire.status === "revoked"
+                      ? "bg-slate-100 text-slate-600 border border-slate-200"
+                      : "bg-amber-100 text-amber-800 border border-amber-200"
+                  }`}
+                >
+                  {questionnaire.status}
+                </span>
+              )}
+            </div>
+
+            {questionnaireError && (
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
+                {questionnaireError}
+              </div>
+            )}
+
+            {questionnaire?.status === "submitted" ? (
+              <div className="space-y-2 text-xs text-slate-600">
+                <p><strong>Service(s):</strong> {questionnaire.service_requested?.join(", ") || "—"}</p>
+                {questionnaire.service_requested_other_detail && (
+                  <p><strong>Other detail:</strong> {questionnaire.service_requested_other_detail}</p>
+                )}
+                <p><strong>Property Type:</strong> {questionnaire.property_type}</p>
+                <p><strong>Water Feature Age:</strong> {questionnaire.water_feature_age}</p>
+                <p><strong>Issue Duration:</strong> {questionnaire.issue_duration}</p>
+                <p><strong>Operating Condition:</strong> {questionnaire.operating_condition}</p>
+                <p><strong>Leak Condition:</strong> {questionnaire.leak_condition}</p>
+                <p><strong>Previously Serviced:</strong> {questionnaire.previous_service_status}</p>
+                {questionnaire.previous_service_explanation && (
+                  <p><strong>Previous Service Notes:</strong> {questionnaire.previous_service_explanation}</p>
+                )}
+                <p><strong>Maintenance Frequency:</strong> {questionnaire.maintenance_frequency}</p>
+                <p><strong>Preferred Contact:</strong> {questionnaire.preferred_contact_method} ({questionnaire.preferred_contact_time})</p>
+                {questionnaire.additional_notes && (
+                  <div className="pt-2 border-t border-slate-100">
+                    <strong>Additional Notes:</strong>
+                    <p className="italic mt-1">&ldquo;{questionnaire.additional_notes}&rdquo;</p>
+                  </div>
+                )}
+                <p className="pt-2 text-[10px] text-slate-400">
+                  Submitted {questionnaire.submitted_at ? new Date(questionnaire.submitted_at).toLocaleString() : ""}
+                </p>
+              </div>
+            ) : (
+              <>
+                <p className="text-xs text-slate-500">
+                  {questionnaire
+                    ? `Not yet completed by the customer${questionnaire.sent_at ? ` (last sent ${new Date(questionnaire.sent_at).toLocaleDateString()})` : ""}.`
+                    : "No questionnaire has been sent yet."}
+                </p>
+                <Button
+                  onClick={handleSendQuestionnaire}
+                  disabled={sendingQuestionnaire}
+                  variant="outline"
+                  size="sm"
+                >
+                  <Send className="w-4 h-4 mr-2" />
+                  <span>{sendingQuestionnaire ? "Sending..." : questionnaire ? "Resend Questionnaire" : "Send Questionnaire"}</span>
+                </Button>
+              </>
+            )}
+          </div>
+
           {/* Add Internal Note Form */}
           <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
             <h3 className="text-base font-bold text-navy-900 flex items-center gap-2">

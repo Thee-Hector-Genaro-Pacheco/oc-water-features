@@ -11,7 +11,7 @@ Professional, dynamic full-stack web application for **OC Water Features**, a fa
 - **Authentication**: Supabase Auth SSR with Server-Side authorization guards
 - **Validation**: Zod schema validation
 - **Styling**: Tailwind CSS
-- **Hosting Target**: AWS Amplify (Dynamic Next.js App Router Hosting)
+- **Hosting Target**: Vercel (Dynamic Next.js App Router Hosting) — see `docs/vercel-deployment.md`
 
 ---
 

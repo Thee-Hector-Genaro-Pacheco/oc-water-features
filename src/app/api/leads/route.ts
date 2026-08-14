@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { leadSubmissionSchema } from "@/schemas/lead";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendLeadNotification } from "@/lib/email/sendLeadNotification";
+import { createOrResendQuestionnaire } from "@/lib/questionnaire/dispatch";
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,6 +30,10 @@ export async function POST(request: NextRequest) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
     // 3. Fallback for Local Dev / Missing Database Credentials
+    // No questionnaire invite is dispatched in this branch — there is no
+    // database to persist a questionnaire row against (the synthetic
+    // "demo-lead-id" isn't a real leads.id), so a submittable link could
+    // never actually work.
     if (!supabaseUrl || supabaseUrl.includes("placeholder")) {
       console.log("[Dev Mode] Lead received successfully (Supabase credentials not configured yet):", {
         fullName: data.fullName,
@@ -112,6 +117,27 @@ export async function POST(request: NextRequest) {
       if (!notificationResult.success) {
         console.error("[API /leads] Lead saved but notification delivery failed:", {
           leadId: leadRecord.id,
+        });
+      }
+
+      // Second-stage intake questionnaire invite — also non-blocking. The
+      // lead is already saved above, so a failure here (DB or email) must
+      // never turn this into an error response or lose the lead.
+      try {
+        const questionnaireResult = await createOrResendQuestionnaire(adminSupabase, {
+          leadId: leadRecord.id,
+          leadName: leadRecord.full_name,
+          leadEmail: leadRecord.email,
+        });
+        if (questionnaireResult.outcome === "error") {
+          console.error("[API /leads] Questionnaire invite dispatch failed:", {
+            leadId: leadRecord.id,
+          });
+        }
+      } catch (err: unknown) {
+        console.error("[API /leads] Questionnaire invite dispatch threw:", {
+          leadId: leadRecord.id,
+          error: err instanceof Error ? err.message : String(err),
         });
       }
     }
