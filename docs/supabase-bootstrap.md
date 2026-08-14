@@ -32,8 +32,8 @@ Create or update `.env.local` in your project root:
 ```bash
 # Supabase Production Credentials
 NEXT_PUBLIC_SUPABASE_URL=https://<your-project-ref>.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...<your-anon-key>
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi...<your-service-role-key>
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...<your-publishable-key>
+SUPABASE_SECRET_KEY=sb_secret_...<your-secret-key>
 
 # Application URL & Settings
 NEXT_PUBLIC_SITE_URL=https://ocwaterfeatures.com
@@ -102,10 +102,9 @@ Server authorization guards (`requireAdmin()`) check `is_active = true` on every
 
 ## 8. Key Rotation Security Protocol
 
-If `SUPABASE_SERVICE_ROLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY` is accidentally exposed:
+If `SUPABASE_SECRET_KEY` or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is accidentally exposed:
 
 1. Navigate to **Project Settings** > **API**.
-2. Click **JWT Secret** > **Generate new secret**.
-3. Re-generate Anon and Service-Role keys.
-4. Immediately update environment variables in your local `.env.local` and host settings (AWS Amplify).
-5. Redeploy application.
+2. Revoke and regenerate the exposed publishable and/or secret key.
+3. Immediately update environment variables in your local `.env.local` and host settings (AWS Amplify).
+4. Redeploy application.

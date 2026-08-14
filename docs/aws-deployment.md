@@ -17,8 +17,8 @@ The OC Water Features website runs as a dynamic Next.js 15 App Router applicatio
 ### 2. Configure Environment Variables in AWS Amplify
 In AWS Amplify Console under **App settings > Environment variables**, add:
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SECRET_KEY`
 - `NEXT_PUBLIC_SITE_URL` (e.g. `https://ocwaterfeatures.com`)
 - `BUSINESS_NOTIFICATION_EMAIL`
 - `ADMIN_NOTIFICATION_EMAIL`
